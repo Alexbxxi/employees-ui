@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form #employeeForm="ngForm" (ngSubmit)="createEmployee(employeeForm)">
+                    <input type="hidden" name="_id" [(ngModel)]="employeeService.selectedEmployee._id">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="name"
+                            placeholder="Enter your fullname" [(ngModel)]="employeeService.selectedEmployee.name" style="text-transform:uppercase">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="position"
+                            placeholder="Enter your position" [(ngModel)]="employeeService.selectedEmployee.position" style="text-transform:uppercase">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="office"
+                            placeholder="Enter your office" [(ngModel)]="employeeService.selectedEmployee.office" style="text-transform:uppercase">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="salary"
+                            placeholder="Enter your salary" [(ngModel)]="employeeService.selectedEmployee.salary" style="text-transform:uppercase">
+                    </div>
+                    <button class="btn btn-primary m-2" type="button" (click)="resetForm(employeeForm)">Clean</button>
+                    <button class="btn btn-secondary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employeeService.employees">
+                    <td>{{ employee.name | uppercase }}</td>
+                    <td>{{ employee.position | uppercase }}</td>
+                    <td>{{ employee.office | uppercase }}</td>
+                    <td>{{ employee.salary | currency }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" (click)="editEmployee(employee)"><i class="material-icons">edit</i></button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee._id)"><i class="material-icons">delete</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
